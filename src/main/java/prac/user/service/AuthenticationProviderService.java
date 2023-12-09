@@ -19,12 +19,11 @@ public class AuthenticationProviderService implements AuthenticationProvider {
 
     private final JpaUserDetailsService userDetailsService;
 
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    private final SCryptPasswordEncoder sCryptPasswordEncoder;
-
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        SCryptPasswordEncoder sCryptPasswordEncoder = new SCryptPasswordEncoder(100, 100, 100, 100, 100);
+
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
 
@@ -57,6 +56,6 @@ public class AuthenticationProviderService implements AuthenticationProvider {
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return false;
+        return true;
     }
 }
