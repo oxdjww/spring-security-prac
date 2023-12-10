@@ -2,6 +2,7 @@ package org.example;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -48,9 +49,12 @@ public class ProjectConfig {
         http
                 .authorizeHttpRequests(
                         auth -> auth
-                                .requestMatchers("/hello").hasRole("ADMIN")
-                                .requestMatchers("/ciao").hasRole("MANAGER")
-                                .anyRequest().permitAll()
+                                .requestMatchers(HttpMethod.GET, "/a")
+                                    .authenticated()
+                                .requestMatchers(HttpMethod.POST, "/a")
+                                    .permitAll()
+                                .anyRequest()
+                                    .denyAll()
                 );
         return http.build();
     }

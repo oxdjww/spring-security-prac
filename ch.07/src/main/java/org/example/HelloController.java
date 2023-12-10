@@ -1,23 +1,29 @@
 package org.example;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloController {
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello";
+    @PostMapping("/a")
+    public String postEndpointA() {
+        return "works";
     }
 
-    @GetMapping("/ciao")
-    public String ciao() {
-        return "ciao";
+    @GetMapping("a")
+    public String getEndpointA() {
+        return "works";
     }
 
-    @GetMapping("/hola")
-    public String hola() {
-        return "hola";
+    @GetMapping("/a/b")
+    public String getEndpointB() {
+        return "works";
+    }
+
+    @GetMapping("/a/b/c")
+    public String getEndpointC() {
+        return "works";
     }
 }
