@@ -53,7 +53,7 @@ public class CustomCsrfTokenRepository
 
         if (existingToken.isPresent()) {
             Token token = existingToken.get();
-            return new DefaultCsrfToken("X-CSRF-TOKEN", "_csrf", token.getToken());
+            return new DefaultCsrfToken("X-CSRF-TOKEN", "__csrf", token.getToken());
         }
 
         return null;
