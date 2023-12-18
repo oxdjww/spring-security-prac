@@ -26,11 +26,7 @@ public class ProjectConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(
-                        auth -> {
-                            auth.csrfTokenRepository(customTokenRepository());
-                        }
-                );
+                .csrf().csrfTokenRepository(customTokenRepository());
         return http.build();
     }
 }
