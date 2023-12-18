@@ -29,10 +29,26 @@ public class SecurityConfig {
                         .permitAll()
                 );
 
+//        http
+//                .csrf(
+//                        AbstractHttpConfigurer::disable
+//                );
+
         http
-                .csrf(
-                        AbstractHttpConfigurer::disable
+                .sessionManagement(auth -> auth
+                        .maximumSessions(1)
+                        .maxSessionsPreventsLogin(true)
                 );
+
+        http
+                .sessionManagement(auth -> auth
+                        .sessionFixation()
+                        .changeSessionId()
+                );
+
+        http
+                .logout((auth) -> auth.logoutUrl("/logout")
+                        .logoutSuccessUrl("/"));
 
         return http.build();
     }
